@@ -1,0 +1,105 @@
+
+    /**
+     * Index {{ entity }} entities.
+     *
+{% if 'annotation' == format %}
+     * @Route("/list", name="{{ route_name_prefix }}_list", options={"expose"=true})
+     * @Method("POST")
+{% endif %}
+     */
+    public function listAction(Request $request)
+    {
+       $query = $this->getDoctrine()->getManager()
+        ->createQueryBuilder()
+        ->select('c')
+        ->from('{{ bundle }}:{{ entity }}', 'c');
+        /* Array of database columns which should be read and sent back to DataTables. Use a space where
+        * you want to insert a non-database field (for example a counter or static image)
+        */
+        $aColumns = array(
+        {%- for field, metadata in fields %}
+            {%- if field == 'id' %}'id',{%- else %}'',{%- endif %}
+        {%- endfor %} '');
+
+        /**
+        * search
+        */
+        if ($request->get('sSearch')) {
+            $search = strtolower($request->get('sSearch'));
+            $query
+            {%- for field, metadata in fields %}
+                {%- if metadata.type in ['test', 'string'] %}
+                  ->orwhere("LOWER(c.{{ field }}) LIKE '%{$search}%'")
+                  {%- else %}
+                  ->orwhere("LOWER(c.{{ field }}) = '{$search}'")
+                {%- endif %}
+            {%- endfor %};
+        }
+        /*
+        * Ordering
+        */
+
+        for ($i = 0; $i < intval($request->get('iSortingCols')); $i++) {
+            if ($request->get('bSortable_' . intval($request->get('iSortCol_' . $i))) == "true") {
+                if (is_array($aColumns[($request->get('iSortCol_' . $i))])) {
+                    $query->add(
+                                'orderBy',
+                                $aColumns[intval($request->get('iSortCol_' . $i))][0] . '.' . $aColumns[intval(
+                                $request->get('iSortCol_' . $i)
+                                )][1] . ' ' . $request->get('sSortDir_' . $i)
+                    );
+                } else {
+                    $query->add(
+                                'orderBy',
+                                $query->getRootAlias() . '.' . $aColumns[intval(
+                                $request->get('iSortCol_' . $i)
+                                )] . ' ' . $request->get('sSortDir_' . $i)
+                                );
+                    }
+                }
+        }
+
+        $query = $query->getQuery();
+
+        $total = 0;
+        if ($request->get('iDisplayLength') != -1) {
+            $paginator = $this->get('knp_paginator');
+            $page = $page = ($request->get('iDisplayStart', 0) / $request->get('iDisplayLength')) + 1;
+            $pagination = $paginator->paginate($query, $page, $request->get('iDisplayLength'));
+
+            $list = $pagination;
+            $total = $pagination->getTotalItemCount();
+        } else {
+            $list = $query->getResult();
+            $total = count($list);
+        }
+
+        /*
+        * Building the json object to send to client side
+        */
+        $aaData = array();
+
+        foreach ($list as $v) {
+            $aaData[] = array(
+            {%- for field, metadata in fields %}
+                "{{ loop.index0 }}" => $v->get{{ field|capitalize }}(),
+            {%- endfor %}
+            "{{ fields | length }}" => $this->renderView('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:actions.html.twig', array('entity' => $v)),
+            );
+        }
+        $output = array(
+        "sEcho" => intval($request->get('sEcho')),
+        "iTotalRecords" => $total,
+        "iTotalDisplayRecords" => $total,
+        "aaData" => $aaData,
+        );
+
+
+        $result = json_encode($output);
+
+        $response = new \Symfony\Component\HttpFoundation\Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($result);
+
+        return $response;
+    }

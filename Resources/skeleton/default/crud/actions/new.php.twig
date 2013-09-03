@@ -1,0 +1,34 @@
+
+    /**
+     * Displays a form to create a new {{ entity }} entity.
+     *
+{% if 'annotation' == format %}
+     * @Route("/{id}/new", name="{{ route_name_prefix }}_new", defaults={"id"=0})
+     * @Method("GET")
+     * @Template()
+{% endif %}
+     */
+    public function newAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if (!$entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id)) {
+            $entity = new {{ entity_class }}();
+        }
+        $accion = ($entity->getId()) ? 'Editar' : 'Nuevo';
+
+        $form   = $this->createForm(new {{ entity_class }}Type(), $entity);
+
+{% if 'annotation' == format %}
+        return array(
+            'entity' => $entity,
+            'accion' => $accion,
+            'form'   => $form->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:new.html.twig', array(
+            'entity' => $entity,
+            'accion' => $accion,
+            'form'   => $form->createView(),
+        ));
+{% endif %}
+    }

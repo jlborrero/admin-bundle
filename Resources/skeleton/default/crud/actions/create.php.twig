@@ -1,0 +1,42 @@
+
+    /**
+     * Creates a new {{ entity }} entity.
+     *
+{% if 'annotation' == format %}
+     * @Route("/{id}/create", name="{{ route_name_prefix }}_create", defaults={"id"=0})
+     * @Method("POST")
+     * @Template("{{ bundle }}:{{ entity }}:new.html.twig")
+{% endif %}
+     */
+    public function createAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if (!$entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id)) {
+            $entity = new {{ entity_class }}();
+        }
+        $form = $this->createForm(new {{ entity_class }}Type(), $entity);
+        $form->bind($request);
+
+        $accion = ($entity->getId()) ? 'actualizado' : 'agregado';
+
+        if ($form->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+            $this->get('session')->getFlashBag()->set('success', 'Se ha ' . $accion . ' correctamente.');
+            return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
+
+        }
+{% if 'annotation' == format %}
+        return array(
+            'entity' => $entity,
+             'accion' => $accion,
+            'form'   => $form->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:new.html.twig', array(
+            'entity' => $entity,
+            'accion' => $accion,
+            'form'   => $form->createView(),
+        ));
+{% endif %}
+    }

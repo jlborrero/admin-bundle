@@ -1,0 +1,22 @@
+{% extends 'JlbsAdminBundle:Layout:base.html.twig' %}
+
+{% block content %}
+    {% from 'JlbsAdminBundle:Crud/macros:macro_div.html.twig' import macro_delete_div %}
+    {{ macro_delete_div() }}
+    {% include 'JlbsAdminBundle:Crud/macros:_show_macro_modal.html.twig' with {'value':slug} %}
+{% endblock %}
+
+{% block foot_script %}
+    {{ parent() }}
+    {%- javascripts
+    '@JlbsAdminBundle/Resources/public/js/jquery.dataTables.min.js'
+    '@JlbsAdminBundle/Resources/public/js/jquery.datatables.paging.js'
+    filter="yui_js"
+    output='js/compiled/backend/DT.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% from 'JlbsAdminBundle:Crud/macros:_show_macro_script.html.twig' import script_show %}
+    {{ script_show(slug) }}
+    {% from 'JlbsAdminBundle:Crud/macros:macro_script_div.html.twig' import script_delete %}
+    {{ script_delete() }}
+{% endblock %}
