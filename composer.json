@@ -1,0 +1,26 @@
+{
+    "name": "Jlbs/admin-bundle",
+    "type": "symfony-bundle",
+    "description": "Easy admin generator for symfony2",
+    "keywords": ["admin", "generator"],
+    "license": "MIT",
+    "version": "master",
+    "authors": [
+        {
+            "name": "Renier Ricardo Figueredo",
+            "email": "aprezcuba24@gmail.com"
+        }
+    ],
+    "require": {
+        "Jlbs/jquery-bundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "dev-master",
+        "lexik/form-filter-bundle": "dev-master",
+        "knplabs/knp-menu-bundle": "2.0.x-dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jlbs\\AdminBundle": ""
+        }
+    },
+    "target-dir": "Jlbs/AdminBundle"
+}
