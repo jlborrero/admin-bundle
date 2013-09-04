@@ -3,12 +3,12 @@
 {% block content %}
     <div id="{% block list_id %}list_id{% endblock %}">
         {% block filter %}
-        <div class="filter_panel table-header thumbnail">
+        <div class="filter_panel table-header img-thumbnail">
             <div class="toggle_filter" id="toggle_filter">
                 {% block filter_form %}{% endblock %}
             </div>            
             <a class="show-hidde-filter" id="toggle_show-hidde-filter" title="{{ 'Show/Hide Filter'|trans }}">
-                <i class="icon-chevron-up icon-white"></i>
+                <i class="glyphicon-chevron-up glyphicon-white"></i>
             </a>
         </div>
         <div class="actions_list">
@@ -18,12 +18,12 @@
         <script type="text/javascript">
            $( "#toggle_show-hidde-filter" ).click(function() {
                 $( "#toggle_filter" ).toggle( 'blind', {}, 500 );
-                if ($('#toggle_show-hidde-filter i').hasClass('icon-chevron-up')) {
-                    $('#toggle_show-hidde-filter i').removeClass('icon-chevron-up');
-                    $('#toggle_show-hidde-filter i').addClass('icon-chevron-down');
+                if ($('#toggle_show-hidde-filter i').hasClass('glyphicon-chevron-up')) {
+                    $('#toggle_show-hidde-filter i').removeClass('glyphicon-chevron-up');
+                    $('#toggle_show-hidde-filter i').addClass('glyphicon-chevron-down');
                 } else {
-                    $('#toggle_show-hidde-filter i').removeClass('icon-chevron-down');
-                    $('#toggle_show-hidde-filter i').addClass('icon-chevron-up');
+                    $('#toggle_show-hidde-filter i').removeClass('glyphicon-chevron-down');
+                    $('#toggle_show-hidde-filter i').addClass('glyphicon-chevron-up');
                 }
             });
         </script>

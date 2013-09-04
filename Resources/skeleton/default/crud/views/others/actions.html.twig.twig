@@ -3,17 +3,17 @@
         {%- if  action == 'show' %}
             <a href="#"
                onclick="showDialog_{{ route_name_prefix }}('{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}')"
-               class="btn btn-mini btn-primary" title="Mostrar"><i class="icon-eye-open icon-white"></i></a>
+               class="btn btn-xs btn-primary" title="Mostrar"><i class="glyphglyphicon-eye-open glyphglyphicon-white"></i></a>
         {%- endif %}
         {%- if  action == 'new' %}
             <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}"
-               class="btn btn-mini btn-success" title="Editar"><i
-                        class="icon-edit icon-white"></i></a>
+               class="btn btn-xs btn-success" title="Editar"><i
+                        class="glyphglyphicon-edit glyphglyphicon-white"></i></a>
         {%- endif %}
         {%- if  action == 'delete' %}
             <a href="#"
                onclick="confirm_delete('{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}')"
-               class="btn btn-mini btn-danger" title="Eliminar"><i class="icon-trash icon-white"></i></a>
+               class="btn btn-xs btn-danger" title="Eliminar"><i class="glyphglyphicon-trash glyphglyphicon-white"></i></a>
         {%- endif %}
     {%- endfor %}
 </div>

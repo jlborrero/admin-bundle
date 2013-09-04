@@ -49,7 +49,7 @@
             ],
             "sPaginationType": "bootstrap",
             "bLengthChange": true,
-            "sDom": "<'row-fluid'<'span6'l><'span6'Tf>r>t<'row-fluid'<'span6'i><'span6'p>>",
+            "sDom": "<'row'<'col-md-6'l><'col-md-6'Tf>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
             "oLanguage": getLocale("es")
         });
     });
@@ -65,11 +65,11 @@
 
 
 {{ "{% block content %}" }}
-<div class="row-fluid">
-    <div class="span2">
+<div class="row">
+    <div class="col-md-2">
         <a style="margin-bottom: 10px;" class="btn btn-primary"
            href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}">
-            <i class="icon-plus icon-white"></i> Crear nuevo
+            <i class="glyphglyphicon-plus glyphglyphicon-white"></i> Crear nuevo
         </a>
     </div>
 </div>
