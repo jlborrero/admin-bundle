@@ -10,8 +10,6 @@ Required
         "friendsofsymfony/jsrouting-bundle": "1.1.*",
         "leafo/lessphp": "dev-master"
 
-
-
 Installation
 ------------
 
@@ -40,7 +38,7 @@ Installation
     }
     1.2.1. ln -s vendor/twitter/bootstrap/ web/
 
-    1.2. AdminBundle, twitters bootstrap and further suggests
+    1.3. AdminBundle, twitters bootstrap and further suggests
 
         ```json
         {
@@ -54,7 +52,7 @@ Installation
                 "leafo/lessphp": "dev-master"
             }
         }
-        1.2.1. ln -s vendor/twitter/bootstrap/ web/
+        1.3.1. ln -s vendor/twitter/bootstrap/ web/
 
 2. Add this bundle to your app/AppKernel.php:
 
@@ -69,3 +67,18 @@ Installation
         );
     }
 
+3. Register the routing in `app/config/routing.yml`:
+
+``` yml
+# app/config/routing.yml
+
+jlbs_backend_dashboard_index:
+    pattern:  /
+    defaults: { _controller: JlbsAdminBundle:Dashboard:index }
+
+
+
+
+Publish assets:
+
+    $ php app/console assets:install --symlink web
