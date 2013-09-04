@@ -36,7 +36,6 @@ Installation
             "twbs/bootstrap": "dev-master"
         }
     }
-    1.2.1. ln -s vendor/twitter/bootstrap/ web/
 
     1.3. AdminBundle, twitters bootstrap and further suggests
 
@@ -52,7 +51,26 @@ Installation
                 "leafo/lessphp": "dev-master"
             }
         }
-        1.3.1. ln -s vendor/twitter/bootstrap/ web/
+     1.4.1 BootstrapBundle, twitters bootstrap and automatic symlinking
+
+        If you decided to let composer install twitters bootstrap, you might want to activate auto symlinking and checking, after composer update/install.
+        So add this to your existing scripts section in your composer json:
+        (recommended!)
+
+        For using Less:
+
+        ```json
+        {
+            "scripts": {
+                "post-install-cmd": [
+                    "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+                ],
+                "post-update-cmd": [
+                    "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+                ]
+            }
+        }
+        ```
 
 2. Add this bundle to your app/AppKernel.php:
 

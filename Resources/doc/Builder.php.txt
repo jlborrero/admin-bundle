@@ -1,0 +1,82 @@
+<?php
+
+namespace My\BackendBundle\Menu;
+
+use Knp\Menu\FactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
+use Symfony\Component\DependencyInjection\Container;
+
+/**
+ * Class for creating menus.
+ *
+ * @author Joe
+ */
+class Builder extends AbstractNavbarMenuBuilder
+{
+
+    protected $factory;
+    protected $securityContext;
+    protected $isLoggedIn;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory, SecurityContextInterface $securityContext)
+    {
+        $this->factory = $factory;
+
+        $this->securityContext = $securityContext;
+        $this->isLoggedIn = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
+
+    }
+
+
+    public function mainMenu(Request $request)
+    {
+
+        $menu = $this->factory->createItem('root');
+
+        $menu->setChildrenAttribute('class', 'nav');
+        if ($this->isLoggedIn) {
+        //add item menu
+        //if install AdminFOSUserBundle
+        /*    $menu->addChild(
+                'usuarios',
+                array('route' => 'admin_user', 'displayChildren' => false, 'label' => 'Usuarios')
+            );
+            */
+        }
+
+        return $menu;
+    }
+
+    public function createRightSideDropdownMenu(Request $request)
+    {
+
+        $menu = $this->factory->createItem('root');
+        $menu->setUri($request->getRequestUri());
+        $menu->setChildrenAttribute('class', 'nav pull-right');
+        //if install AdminFOSUserBundle
+      /*  if ($this->isLoggedIn) {
+            $dropdown = $this->createDropdownMenuItem(
+                $menu,
+                "Usuario: " . $this->securityContext->getToken()->getUser(),
+                true,
+                array('icon' => 'caret')
+            );
+            $dropdown->addChild('Perfil', array('route' => 'fos_user_profile_edit'));
+            $dropdown->addChild('Cambiar contraseña', array('route' => 'fos_user_change_password', 'icon' => 'caret'));
+            //adding a nice divider
+            $this->addDivider($dropdown);
+            $dropdown->addChild('Salir', array('route' => 'fos_user_security_logout'));
+        }
+       */
+        return $menu;
+    }
+
+
+}
+
+?>
