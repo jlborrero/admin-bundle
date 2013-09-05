@@ -3,7 +3,7 @@
      * Displays a form to create a new {{ entity }} entity.
      *
 {% if 'annotation' == format %}
-     * @Route("/{id}/new", name="{{ route_name_prefix }}_new", defaults={"id"=0})
+     * @Route("/{id}/new", name="admin_{{ route_name_prefix }}_new", defaults={"id"=0})
      * @Method("GET")
      * @Template()
 {% endif %}

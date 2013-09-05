@@ -3,7 +3,7 @@
      * Creates a new {{ entity }} entity.
      *
 {% if 'annotation' == format %}
-     * @Route("/{id}/create", name="{{ route_name_prefix }}_create", defaults={"id"=0})
+     * @Route("/{id}/create", name="admin_{{ route_name_prefix }}_create", defaults={"id"=0})
      * @Method("POST")
      * @Template("{{ bundle }}:{{ entity }}:new.html.twig")
 {% endif %}
@@ -23,7 +23,7 @@
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->set('success', 'Se ha ' . $accion . ' correctamente.');
-            return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
+            return $this->redirect($this->generateUrl('admin_{{ route_name_prefix }}'));
 
         }
 {% if 'annotation' == format %}

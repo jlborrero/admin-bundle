@@ -3,7 +3,7 @@
      * Deletes a {{ entity }} entity.
      *
 {% if 'annotation' == format %}
-     * @Route("/{id}/delete", name="{{ route_name_prefix }}_delete")
+     * @Route("/{id}/delete", name="admin_{{ route_name_prefix }}_delete")
      * @Method("GET")
      **/
 {% endif %}
@@ -17,6 +17,6 @@
         $em->remove($entity);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
+        return $this->redirect($this->generateUrl('admin_{{ route_name_prefix }}'));
 
     }

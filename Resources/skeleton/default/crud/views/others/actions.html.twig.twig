@@ -1,19 +1,23 @@
 <div class="table_actions">
+
     {%- for action in record_actions %}
         {%- if  action == 'show' %}
             <a href="#"
-               onclick="showDialog_{{ route_name_prefix }}('{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}')"
-               class="btn btn-xs btn-primary" title="Mostrar"><i class="glyphglyphicon-eye-open glyphglyphicon-white"></i></a>
+               onclick="showDialog_{{ route_name_prefix }}('{{ "{{ path('admin_" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}')"
+               class="btn btn-xs btn-primary" title="Mostrar"><span class="glyphicon glyphicon-eye-open glyphiconicon-white"></span></a>
         {%- endif %}
+
         {%- if  action == 'new' %}
-            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}"
-               class="btn btn-xs btn-success" title="Editar"><i
-                        class="glyphglyphicon-edit glyphglyphicon-white"></i></a>
+            <a href="{{ "{{ path('admin_" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}"
+               class="btn btn-xs btn-success" title="Editar"><span
+                        class="glyphicon glyphicon-edit glyphicon-white"></span></a>
         {%- endif %}
+
         {%- if  action == 'delete' %}
             <a href="#"
-               onclick="confirm_delete('{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}')"
-               class="btn btn-xs btn-danger" title="Eliminar"><i class="glyphglyphicon-trash glyphglyphicon-white"></i></a>
+               onclick="confirm_delete('{{ "{{ path('admin_" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}')"
+               class="btn btn-xs btn-danger" title="Eliminar"><span class="glyphicon glyphicon-trash glyphicon-white"></span></a>
         {%- endif %}
     {%- endfor %}
+
 </div>

@@ -99,13 +99,8 @@ class DoctrineCrudGenerator extends BaseDoctrineCrudGenerator
      */
     protected function generateIndexView($dir)
     {
-        $this->renderFile($this->skeletonDir, 'views/others/actions.html.twig.twig', $dir.'/actions.html.twig', array(
-               // 'dir'               => $this->skeletonDir,
-               // 'entity'            => $this->entity,
-               // 'fields'            => $this->metadata->fieldMappings,
-              //  'actions'           => $this->actions,
+        $this->renderFile('crud/views/others/actions.html.twig.twig', $dir.'/actions.html.twig', array(
                 'record_actions'    => $this->getRecordActions(),
-             //   'route_prefix'      => $this->routePrefix,
                 'route_name_prefix' => $this->routeNamePrefix,
             ));
         parent::generateIndexView($dir);
@@ -133,11 +128,10 @@ class DoctrineCrudGenerator extends BaseDoctrineCrudGenerator
             throw new \RuntimeException('Unable to generate the controller as it already exists.');
         }
 
-        $this->renderFile($this->skeletonDir, 'controller.php.twig', $target, array(
+        $this->renderFile('crud/controller.php.twig', $target, array(
                 'actions'           => $this->actions,
                 'route_prefix'      => $this->routePrefix,
                 'route_name_prefix' => $this->routeNamePrefix,
-                'dir'               => $this->skeletonDir,
                 'bundle'            => $this->bundle->getName(),
                 'entity'            => $this->entity,
                 'entity_class'      => $entityClass,
@@ -161,7 +155,7 @@ class DoctrineCrudGenerator extends BaseDoctrineCrudGenerator
         $dir    = $this->bundle->getPath() .'/Tests/Controller';
         $target = $dir .'/'. str_replace('\\', '/', $entityNamespace).'/'. $entityClass .'ControllerTest.php';
 
-        $this->renderFile($this->skeletonDir, 'tests/test.php.twig', $target, array(
+        $this->renderFile('crud/tests/test.php.twig', $target, array(
                 'route_prefix'      => $this->routePrefix,
                 'route_name_prefix' => $this->routeNamePrefix,
                 'entity'            => $this->entity,
@@ -170,7 +164,6 @@ class DoctrineCrudGenerator extends BaseDoctrineCrudGenerator
                 'entity_namespace'  => $entityNamespace,
                 'actions'           => $this->actions,
                 'form_type_name'    => strtolower(str_replace('\\', '_', $this->bundle->getNamespace()).($parts ? '_' : '').implode('_', $parts).'_'.$entityClass.'Type'),
-                'dir'               => $this->skeletonDir,
                 'fields'            => $this->metadata->fieldMappings,
             ));
     }

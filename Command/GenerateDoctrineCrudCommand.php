@@ -44,8 +44,6 @@ class GenerateDoctrineCrudCommand extends BaseGenerateDoctrineCrudCommand
         }
         $this->setGenerator($theme_colletion->getTheme($input->getOption('theme'))->getGenerator());
         $this->setFormGenerator($theme_colletion->getTheme($input->getOption('theme'))->getFormGenerator());
-
-
         return parent::execute($input, $output);
     }
 

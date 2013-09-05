@@ -8,7 +8,7 @@
 
     var oTable = null;
     $(document).ready(function () {
-        var url = Routing.generate('{{ route_name_prefix }}_list');
+        var url = Routing.generate('admin_{{ route_name_prefix }}_list');
         oTable = $('#example').dataTable({
             "iDisplayLength": 10,
             "aLengthMenu": [
@@ -36,9 +36,9 @@
             "aoColumns": [
                 {%- for field, metadata in fields %}
                 {%- if field == 'id' %}
-                    {"sWidth": "5%"},
+                {"sWidth": "5%"},
                 {%- else  %}
-                    { "bSortable": false},
+                { "bSortable": false},
                 {%- endif  %}
                 {{ '\r\n' }}
                 {%- endfor %}
@@ -50,7 +50,26 @@
             "sPaginationType": "bootstrap",
             "bLengthChange": true,
             "sDom": "<'row'<'col-md-6'l><'col-md-6'Tf>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-            "oLanguage": getLocale("es")
+            "oLanguage": {
+                "sLengthMenu": "Show _MENU_ Rows",
+                "sSearch": "",
+                "Language": getLocale("es")
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#example').each(function () {
+            var datatable = $(this);
+            // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+            var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+            search_input.attr('placeholder', 'Search');
+            search_input.addClass('form-control input-sm');
+            // LENGTH - Inline-Form control
+            var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+            length_sel.addClass('form-control input-sm');
+            // LENGTH - Info adjust location
+            // var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_info]');
+            // length_sel.css('margin-top', '18px');
         });
     });
 </script>
@@ -68,8 +87,8 @@
 <div class="row">
     <div class="col-md-2">
         <a style="margin-bottom: 10px;" class="btn btn-primary"
-           href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}">
-            <i class="glyphglyphicon-plus glyphglyphicon-white"></i> Crear nuevo
+           href="{{ "{{ path('admin_" ~ route_name_prefix ~ "_new') }}" }}">
+            <i class="glyphicon glyphicon-plus glyphicon-white"></i> Crear nuevo
         </a>
     </div>
 </div>
