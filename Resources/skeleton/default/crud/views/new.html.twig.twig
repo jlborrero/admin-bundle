@@ -4,21 +4,25 @@
 
 {{ "{% block migas %}" }}
 {{ "{{ parent() }}" }}
-    <li><a href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">Gestionar {{ entity }}</a> <span class="divider">/</span></li>
-    <li class="active">{{ "{{ accion }}"}} {{ entity }}</li>
+<li><a href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">Gestionar {{ entity }}</a></li>
+<li class="active">{{ "{{ accion }}" }} {{ entity }}</li>
 {{ "{% endblock %}" }}
 
 {{ "{% block content %}" }}
 
-    <form class="form-horizontal" action="{{ "{{ path('" ~ route_name_prefix ~ "_create', { 'id': entity.id | default(0) }) }}" }}" method="post" {{ "{{ form_enctype(form) }}" }}>
+<form class="form-horizontal"
+      action="{{ "{{ path('" ~ route_name_prefix ~ "_create', { 'id': entity.id | default(0) }) }}" }}"
+      method="post" {{ "{{ form_enctype(form) }}" }}>
+    <div class="col-lg-offset-1 col-lg-8">
+    {{ "{{ form_widget(form) }}" }}
 
-        {{ "{{ form_widget(form) }}" }}
-
-        <div>
-            <button class="btn btn-primary" data-loading-text="Guardando..." type="submit">{{ "{{ accion }}"}}</button>
+    <div class="form-group">
+        <div class="col-lg-offset-3 col-lg-6">
+            <button class="btn btn-primary" data-loading-text="Guardando..." type="submit">{{ "{{ accion }}" }}</button>
             <a class="btn" href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">
                 Cancelar
             </a>
         </div>
-    </form>
+    </div>
+</form>
 {{ "{% endblock %}" }}

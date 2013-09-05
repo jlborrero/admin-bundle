@@ -13,7 +13,7 @@
             {# Override this block to add your own files! #}
             {% stylesheets
             '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
-            '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-datepicker.less'
+            '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-3-datepicker.less'
             '@JlbsAdminBundle/Resources/public/css/DT_bootstrap.less'
             '@JlbsAdminBundle/Resources/public/css/style.less'
             '@JlbsAdminBundle/Resources/public/css/jackedup.css'
@@ -57,7 +57,8 @@
             filter="yui_js" %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
-            <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            <script type="text/javascript"
+                    src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
         {% endblock head_script %}
 
         <title>{% block title %}Administración | {% endblock title %}</title>
@@ -76,7 +77,7 @@
 
 {% block body %}
     {% block navbar %}
-        {{ mopa_bootstrap_navbar('backendNavbar') }}
+        {{ mopa_bootstrap_navbar('backendNavbar', {'template': 'JlbsAdminBundle:Navbar:navbar.html.twig'}) }}
     {% endblock navbar %}
 
     {% block container %}
@@ -86,8 +87,7 @@
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         {% block migas %}
                             <li>
-                                <a href="#"><a href="{{ path('jlbs_backend_dashboard_index') }}">Backend</a><span
-                                            class="divider">/</span>
+                                <a href="#"><a href="{{ path('jlbs_backend_dashboard_index') }}">Backend</a>
                             </li>
                         {% endblock %}
                     {% endif %}
@@ -95,12 +95,6 @@
             {% endblock %}
 
             <div class="content">
-                {% block page_header %}
-                    <div class="page-header">
-                        <h1>{% block headline %}Mopa Bootstrap Bundle{% endblock headline %}</h1>
-                    </div>
-                {% endblock page_header %}
-
                 {% block flashes %}
                     {% if app.session.flashbag.peekAll|length > 0 %}
                         <div class="row">
