@@ -4,7 +4,7 @@
  *
  * Maybe nice to convert this to a command and then reuse command in here.
  */
-namespace Jlbs\AdminBundle\Command\Composer;
+namespace Jlbs\AdminBundle\Composer;
 
 use Composer\Script\Event;
 use Mopa\Bridge\Composer\Util\ComposerPathFinder;
