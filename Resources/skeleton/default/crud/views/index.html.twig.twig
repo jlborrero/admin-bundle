@@ -1,0 +1,89 @@
+{{ "{% extends 'JlbsAdminBundle:Layout:base_list.html.twig' %}" }}
+{{ "{% block title %}{{ parent() }}" ~entity ~ "{% endblock title %} " }}
+{{ "{% block page_header %}{% endblock page_header %}" }}
+
+{{ "{% block foot_script %}" }}
+    {{ "{{ parent() }}" }}
+<script type="text/javascript">
+
+    var oTable = null;
+    $(document).ready(function () {
+        var url = Routing.generate('{{ route_name_prefix }}_list');
+        oTable = $('#example').dataTable({
+            "iDisplayLength": 10,
+            "aLengthMenu": [
+                [5, 10, 20, 50, -1],
+                [5, 10, 20, 50, "All"]
+            ],
+            "bProcessing": true,
+            "bServerSide": true,
+            "bStateSave": true,
+            "iCookieDuration": 7200,
+            "sAjaxSource": url,
+            "fnServerData": function (sSource, aoData, fnCallback) {
+                $.ajax({
+                    "dataType": 'json',
+                    "type": "POST",
+                    "url": sSource,
+                    "data": aoData,
+                    "success": function (json) {
+                        /* Do whatever additional processing you want on the callback,
+                         then tell DataTables */
+                        fnCallback(json)
+                    } });
+            },
+            "sServerMethod": "POST",
+            "aoColumns": [
+                {%- for field, metadata in fields %}
+                {%- if field == 'id' %}
+                    {"sWidth": "5%"},
+                {%- else  %}
+                    { "bSortable": false},
+                {%- endif  %}
+                {{ '\r\n' }}
+                {%- endfor %}
+                {"bSortable": false, "sWidth": "10%"}
+            ],
+            "aaSorting": [
+                [0, 'asc']
+            ],
+            "sPaginationType": "bootstrap",
+            "bLengthChange": true,
+            "sDom": "<'row-fluid'<'span6'l><'span6'Tf>r>t<'row-fluid'<'span6'i><'span6'p>>",
+            "oLanguage": getLocale("es")
+        });
+    });
+</script>
+
+{{ "{% endblock %}" }}
+
+
+{{ "{% block migas %}" }}
+    {{ "{{ parent() }}" }}
+<li class="active">Gestión de {{ entity }}</li>
+{{ "{% endblock %}" }}
+
+
+{{ "{% block content %}" }}
+<div class="row-fluid">
+    <div class="span2">
+        <a style="margin-bottom: 10px;" class="btn btn-primary"
+           href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}">
+            <i class="icon-plus icon-white"></i> Crear nuevo
+        </a>
+    </div>
+</div>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+    <thead>
+    <tr>
+        {%- for field, metadata in fields %}
+
+            <th>{{ field|capitalize }}</th>
+
+        {%- endfor %}
+        <th>Acciones</th>
+    </tr>
+    </thead>
+</table>
+{{ "{{ parent() }}" }}
+{{ "{% endblock %}" }}

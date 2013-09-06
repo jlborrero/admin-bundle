@@ -1,0 +1,48 @@
+{% if 'index' in actions %}
+{{ route_name_prefix }}:
+    pattern:  /
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:index" }
+{% endif %}
+
+
+{% if 'list' in actions %}
+    {{ route_name_prefix }}_show:
+    pattern:  /{id}/list
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:list" }
+    options:
+      expose: true
+{% endif %}
+
+{% if 'show' in actions %}
+{{ route_name_prefix }}_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:show" }
+{% endif %}
+
+{% if 'new' in actions %}
+{{ route_name_prefix }}_new:
+    pattern:  /{id}/new
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:new", id=0 }
+
+{{ route_name_prefix }}_create:
+    pattern:  /{id}/create
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:create", id=0 }
+    requirements: { _method: post }
+{% endif %}
+
+{% if 'edit' in actions %}
+{{ route_name_prefix }}_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:edit" }
+
+{{ route_name_prefix }}_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:update" }
+    requirements: { _method: post|put }
+{% endif %}
+
+{% if 'delete' in actions %}
+{{ route_name_prefix }}_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:delete" }
+{% endif %}

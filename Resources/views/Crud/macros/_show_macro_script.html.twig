@@ -1,0 +1,23 @@
+{% macro script_show(value) %}
+    <script type="text/javascript">
+        function showDialog_{{ value }}(url) {
+            $.ajax({
+                url: url,
+                beforeSend: function (objeto) {
+                    var options = {
+                        'backdrop': true,
+                        'keyboard': true,
+                        'show': true
+                    };
+                    $('#my-modal-{{ value }}-detalles').modal(options);
+                },
+                success: function (data) {
+                    $('.modal-body-{{ value }}-detalles').html(data);
+                }
+            });
+
+            return false;
+        }
+    </script>
+
+{% endmacro %}

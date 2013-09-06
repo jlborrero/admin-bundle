@@ -1,5 +1,5 @@
 {
-    "name": "Jlbs/admin-bundle",
+    "name": "jlbs/admin-bundle",
     "type": "symfony-bundle",
     "description": "Easy admin generator for symfony2",
     "keywords": ["admin", "generator"],
@@ -12,10 +12,11 @@
         }
     ],
     "require": {
-        "Jlbs/jquery-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
-        "lexik/form-filter-bundle": "dev-master",
-        "knplabs/knp-menu-bundle": "2.0.x-dev"
+        "knplabs/knp-menu-bundle": "@dev",
+        "mopa/bootstrap-bundle": "@dev",
+        "friendsofsymfony/jsrouting-bundle": "1.1.*",
+        "leafo/lessphp": "dev-master"
     },
     "autoload": {
         "psr-0": {

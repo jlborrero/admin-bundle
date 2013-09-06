@@ -1,0 +1,24 @@
+{{ "{% extends 'JlbsAdminBundle:Layout:base.html.twig' %}" }}
+{{ "{% block title %}{{ parent() }} {{ accion }}" ~entity ~ "{% endblock title %} " }}
+{{ "{% block page_header %}{% endblock page_header %}" }}
+
+{{ "{% block migas %}" }}
+{{ "{{ parent() }}" }}
+    <li><a href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">Gestionar {{ entity }}</a> <span class="divider">/</span></li>
+    <li class="active">{{ "{{ accion }}"}} {{ entity }}</li>
+{{ "{% endblock %}" }}
+
+{{ "{% block content %}" }}
+
+    <form class="form-horizontal" action="{{ "{{ path('" ~ route_name_prefix ~ "_create', { 'id': entity.id | default(0) }) }}" }}" method="post" {{ "{{ form_enctype(form) }}" }}>
+
+        {{ "{{ form_widget(form) }}" }}
+
+        <div class="form-actions">
+            <button class="btn btn-primary" data-loading-text="Guardando..." type="submit">{{ "{{ accion }}"}}</button>
+            <a class="btn" href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">
+                Cancelar
+            </a>
+        </div>
+    </form>
+{{ "{% endblock %}" }}

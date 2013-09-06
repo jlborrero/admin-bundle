@@ -1,0 +1,28 @@
+{# macro para algunos script de los mensajes boxs#}
+ {% macro script_delete() %}
+
+<script type="text/javascript">
+    function confirm_delete(url) {
+        // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+        $("#dialog:ui-dialog").dialog("destroy");
+
+        $("#dialog-confirm-delete").dialog({
+            resizable:false,
+            height:165,
+            modal:true,
+            buttons:{
+                "Sí":function () {
+                    $(this).dialog("close");
+                    location.href = url;
+                },
+                'No':function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+        });
+    }
+</script>
+
+{% endmacro %}
+
