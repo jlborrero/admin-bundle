@@ -10,9 +10,11 @@
     <head>
         <meta charset="UTF-8"/>
         {% block head_style %}
-            {# Override this block to add your own files! #}
-            {% stylesheets
+            {# Override this block to add your own files!
             '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+            #}
+            {% stylesheets
+            'bootstrap/less/bootstrap.less'
             '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-3-datepicker.less'
             '@JlbsAdminBundle/Resources/public/css/DT_bootstrap.less'
             '@JlbsAdminBundle/Resources/public/css/style.less'
