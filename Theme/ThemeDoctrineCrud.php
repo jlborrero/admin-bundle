@@ -58,6 +58,7 @@ class ThemeDoctrineCrud implements ThemeDoctrineCrudInterface, ContainerAwareInt
             }
 
             $this->formGenerator = new DoctrineFormGenerator($this->getContainer()->get('filesystem'), $dir_path);
+            $this->formGenerator->setSkeletonDirs($this->getSkeletonDirs());
         }
 
         return $this->formGenerator;
