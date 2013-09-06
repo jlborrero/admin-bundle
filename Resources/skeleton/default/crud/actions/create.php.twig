@@ -17,15 +17,17 @@
         $form = $this->createForm(new {{ entity_class }}Type(), $entity);
         $form->bind($request);
 
-        $accion = ($entity->getId()) ? 'actualizado' : 'agregado';
-
         if ($form->isValid()) {
+            $accion = ($entity->getId()) ? 'actualizado' : 'agregado';
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->set('success', 'Se ha ' . $accion . ' correctamente.');
             return $this->redirect($this->generateUrl('admin_{{ route_name_prefix }}'));
 
         }
+        $this->get('session')->getFlashBag()->set('danger','Se encontraron algunos errores. Por favor, verifique los campos señalados.');
+        $accion = ($entity->getId()) ? 'Editar' : 'Nuevo';
+
 {% if 'annotation' == format %}
         return array(
             'entity' => $entity,

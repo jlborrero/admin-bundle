@@ -1,9 +1,18 @@
-<div style="overflow-x: hidden; width: 700px; margin-left: -350px;" id="my-modal-{{ value }}-detalles" class="modal large hide fade">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Detalles del {{ value }}</h3>
+<div style="overflow-x: hidden;" class="modal fade" id="my-modal-{{ value }}-detalles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Detalles del {{ value }}</h4>
+            </div>
+            <div id="modal-body-lugar-detalles" class="modal-body-{{ value }}-detalles">
+                Cargando detalles del {{ value }}...
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
-    <div id="modal-body-lugar-detalles" class="modal-body-{{ value }}-detalles">
-        Cargando detalles del {{ value }}...
-    </div>
+    <!-- /.modal-dialog -->
 </div>

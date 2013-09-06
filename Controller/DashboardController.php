@@ -3,9 +3,9 @@
 
 namespace Jlbs\AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 
-class DashboardController extends Controller
+class DashboardController extends BaseController
 {
     public function indexAction()
     {
