@@ -4,9 +4,9 @@
         <tr>
             <th>{{ field|capitalize }}</th>
 
-            {%- if metadata.type in ['date', 'datetime'] %}
+            {%- if metadata.type in ['date', 'datetime', 'datetimetz'] %}
 
-                <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}' }}</td>
+                <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'d/m/Y h:m:s\') }}' }}</td>
 
             {%- else %}
 
