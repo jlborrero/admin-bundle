@@ -9,7 +9,6 @@
 {{ "{% endblock %}" }}
 
 {{ "{% block content %}" }}
-
 <form class="form-horizontal"
       action="{{ "{{ path('admin_" ~ route_name_prefix ~ "_create', { 'id': entity.id | default(0) }) }}" }}"
       method="post" {{ "{{ form_enctype(form) }}" }}>

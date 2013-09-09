@@ -1,0 +1,71 @@
+{% extends 'MopaBootstrapBundle:Form:fields_bs_3.html.twig' %}
+
+{% block widget_form_group_start %}
+{% spaceless %}
+{% if widget_form_group|default(false) or form.parent == null %}
+    {% if prototype is defined %}
+        {% set data_prototype = 'collection' in form.vars.block_prefixes and not omit_collection_item ? '<div class="collection-item ' ~ widget_items_attr.class|default()|join(' ') ~ '" id="' ~ prototype.vars.id ~ '_control_group">' ~ form_row(prototype) ~ '</div>' : form_row(prototype) %}
+        {% set data_prototype_name = form.vars.form.vars.prototype.vars.name|default('__name__') %}
+        {% set widget_form_group_attr = widget_form_group_attr|merge({'data-prototype': data_prototype, 'data-prototype-name': data_prototype_name})|merge(attr) %}
+    {% endif %}
+    {% set widget_form_group_attr = widget_form_group_attr|merge({'id': id ~ '_control_group', 'class': widget_form_group_attr.class|default('') ~ ' form-group '}) %}
+    {% if errors|length > 0 %}
+        {% set widget_form_group_attr = widget_form_group_attr|merge({'class': widget_form_group_attr.class|default('') ~ ' has-error'}) %}
+    {% endif %}
+    {% if 'collection' in form.vars.block_prefixes and attr.class is defined %}
+        {% set widget_form_group_attr = widget_form_group_attr|merge({'class': widget_form_group_attr.class|default('') ~ ' ' ~ attr.class}) %}
+    {% endif %}
+    <div {% for attrname,attrvalue in widget_form_group_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+    {# a form item containing the field in block_prefixes is a near subform or a field directly #}
+    {% if (form|length > 0 and form.parent != null)
+    and 'field' not in form.vars.block_prefixes %}
+        {% if show_child_legend %}
+            {{ block('form_legend') }}
+        {% elseif label_render %}
+            {{ form_label(form, label|default(null)) }}
+        {% endif %}
+    {% else %}
+        {% if label_render %}
+            {{ form_label(form, label|default(null)) }}
+        {% endif %}
+    {% endif %}
+{% else %}
+    {% if label_render %}
+        {{ form_label(form, label|default(null)) }}
+    {% endif %}
+{% endif %}
+{% if horizontal and not label_render %}
+    <label class="{{ horizontal_label_class }} control-label"></label>
+{% endif %}
+{% if horizontal %}
+<div class="{{ horizontal_input_wrapper_class }}">
+    {% endif %}
+    {% endspaceless %}
+    {% endblock widget_form_group_start %}
+
+{# Errors #}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if error_delay %}
+            {% for child in form %}
+                {% if loop.index == 1 %}
+                    {% if child.set('errors', errors) %}{% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {# prevent deep nesting wrong context copy error #}
+            {% from 'JlbsAdminBundle:Form:flash.html.twig' import flash %}
+            {% for error in errors %}
+                {{
+                flash(
+                'error',
+                error.messagePluralization is null
+                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                )
+                }}
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
