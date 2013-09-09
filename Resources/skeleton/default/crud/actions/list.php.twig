@@ -31,7 +31,7 @@
                 {%- if metadata.type in ['test', 'string'] %}
                   ->orwhere("LOWER(c.{{ field }}) LIKE '%{$search}%'")
                   {%- else %}
-                  ->orwhere("LOWER(c.{{ field }}) LIKE '%{$search}%'")
+                  ->orwhere("LOWER(c.{{ field }}) = '{$search}'")
                 {%- endif %}
             {%- endfor %};
         }
@@ -82,11 +82,7 @@
         foreach ($list as $v) {
             $aaData[] = array(
             {%- for field, metadata in fields %}
-                 {%- if metadata.type in ['date', 'datetime', 'datetimetz'] %}
-                     "{{ loop.index0 }}" => $v->get{{ field | replace({'_': ''})| capitalize }}()->format('d/m/Y h:m:s'),
-                 {%- else %}
-                     "{{ loop.index0 }}" => $v->get{{ field | replace({'_': ''})| capitalize }}(),
-                 {%- endif %}
+                "{{ loop.index0 }}" => $v->get{{ field | replace({'_': ''})| capitalize }}(),
             {%- endfor %}
             "{{ fields | length }}" => $this->renderView('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:actions.html.twig', array('entity' => $v)),
             );

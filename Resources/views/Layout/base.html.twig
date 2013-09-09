@@ -12,14 +12,14 @@
         {% block head_style %}
             {# Override this block to add your own files!
             '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+                   '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-3-datepicker.less'
             #}
             {% stylesheets
             'bootstrap/less/bootstrap.less'
-            '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-3-datepicker.less'
             '@JlbsAdminBundle/Resources/public/css/DT_bootstrap.less'
             '@JlbsAdminBundle/Resources/public/css/style.less'
             '@JlbsAdminBundle/Resources/public/css/jackedup.css'
-            '@JlbsAdminBundle/Resources/public/css/jquery-ui.css'
+            '@JlbsAdminBundle/Resources/public/css/jquery-ui-1.10.3.css'
             '@JlbsAdminBundle/Resources/public/css/jquery.tagsinput.css'
             '@JlbsAdminBundle/Resources/public/css/lightbox.css'
             filter="lessphp, yui_css, cssrewrite" %}
@@ -34,9 +34,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         {% block head_script %}
-            {# Overwrite this block to add your own js here, to get them generated into final files #}
+            {# Overwrite this block to add your own js here, to get them generated into final files
+
+            '@MopaBootstrapBundle/Resources/public/js/eyecon-bootstrap-datepicker.js'
+            #}
             {% javascripts
-            '@JlbsAdminBundle/Resources/public/js/jquery-1.7.2.min.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery-1.9.1.js'
             '@JlbsAdminBundle/Resources/public/js/jquery-ui.js'
             '@JlbsAdminBundle/Resources/public/js/humane.min.js'
             '@JlbsAdminBundle/Resources/public/js/comun.js'
@@ -52,7 +55,6 @@
             '@MopaBootstrapBundle/Resources/bootstrap/js/carousel.js'
             '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
             '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
-            '@MopaBootstrapBundle/Resources/public/js/eyecon-bootstrap-datepicker.js'
             'bundles/fosjsrouting/js/router.js'
             '@JlbsAdminBundle/Resources/public/js/lightbox.js'
             '@JlbsAdminBundle/Resources/public/js/jquery.form.js'
