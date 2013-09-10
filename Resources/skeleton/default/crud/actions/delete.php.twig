@@ -9,14 +9,28 @@
 {% endif %}
     public function deleteAction($id)
     {
+        $output = array();
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id);
         if (!$entity) {
-          throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
+            $output['status'] = array(
+                'code' => 'success',
+                'message' => $this->get('translator')->trans('No se encontro el registro.')
+            );
+        }else{
+             $output['status'] = array(
+                'code' => 'success',
+                'message' => $this->get('translator')->trans('Se ha eliminado correctamente.')
+            );
+            $em->remove($entity);
+            $em->flush();
         }
-        $em->remove($entity);
-        $em->flush();
+        $result = json_encode($output);
 
-        return $this->redirect($this->generateUrl('admin_{{ route_name_prefix }}'));
+        $response = new \Symfony\Component\HttpFoundation\Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($result);
+
+        return $response;
 
     }

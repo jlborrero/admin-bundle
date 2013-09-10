@@ -13,7 +13,13 @@
             buttons:{
                 "Sí":function () {
                     $(this).dialog("close");
-                    location.href = url;
+                    $.ajax({
+                        url: url,
+                        success: function (data) {
+                            humaneAlert(data.status.code, data.status.message);
+                            oTable.fnDraw();
+                        }
+                    });
                 },
                 'No':function () {
                     $(this).dialog("close");
