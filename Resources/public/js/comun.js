@@ -11,7 +11,7 @@ function getLocale(locale){
     "sInfoEmpty":    "Mostrando desde 0 hasta 0 de 0 registros",
     "sInfoFiltered": "(filtrado de _MAX_ registros en total)",
     "sInfoPostFix":  "",
-    "sSearch":       "Buscar:",
+    "sSearch":       "",
     "sUrl":          "",
     "oPaginate": {
         "sFirst":    "Primero",
