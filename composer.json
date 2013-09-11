@@ -14,7 +14,7 @@
     "require": {
         "knplabs/knp-paginator-bundle": "dev-master",
         "knplabs/knp-menu-bundle": "@dev",
-        "mopa/bootstrap-bundle": "dev-wip-bootstrap-3-integration",
+        "mopa/bootstrap-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "1.1.*",
         "leafo/lessphp": "dev-master"
     },
