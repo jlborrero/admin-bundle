@@ -18,7 +18,7 @@
         */
         $aColumns = array(
         {%- for field, metadata in fields %}
-            {%- if field == 'id' %}'id',{%- else %}'',{%- endif %}
+            {%- if metadata.type in ['integer','text', 'string','datetime','datetimez'] %} '{{ field }}',{%- else %}'',{%- endif %}
         {%- endfor %} '');
 
         /**

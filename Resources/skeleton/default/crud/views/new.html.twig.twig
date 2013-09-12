@@ -13,14 +13,16 @@
       action="{{ "{{ path('admin_" ~ route_name_prefix ~ "_create', { 'id': entity.id | default(0) }) }}" }}"
       method="post" {{ "{{ form_enctype(form) }}" }}>
     <div class="col-lg-offset-1 col-lg-8">
-    {{ "{{ form_widget(form) }}" }}
+        {{ "{{ form_widget(form) }}" }}
 
-    <div class="form-group">
-        <div class="col-lg-offset-3 col-lg-6">
-            <button class="btn btn-primary" data-loading-text="Guardando..." type="submit">{{ "{{ accion }}" }}</button>
-            <a class="btn" href="{{ "{{ path('admin_" ~ route_name_prefix ~ "') }}" }}">
-                Cancelar
-            </a>
+        <div class="form-group">
+            <div class="col-lg-offset-3 col-lg-6">
+                <button class="btn btn-primary" data-loading-text="Guardando..."
+                        type="submit">{{ "{{ accion }}" }}</button>
+                <a class="btn" href="{{ "{{ path('admin_" ~ route_name_prefix ~ "') }}" }}">
+                    Cancelar
+                </a>
+            </div>
         </div>
     </div>
 </form>

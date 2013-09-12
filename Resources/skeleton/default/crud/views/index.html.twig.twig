@@ -36,9 +36,11 @@
             "aoColumns": [
                 {%- for field, metadata in fields %}
                 {%- if field == 'id' %}
-                {"sWidth": "5%"},
+                    {"sWidth": "5%"},
+                {%- elseif metadata.type in ['integer','text', 'string','datetime','datetimez'] %}
+                    {},
                 {%- else  %}
-                { "bSortable": false},
+                    { "bSortable": false},
                 {%- endif  %}
                 {{ '\r\n' }}
                 {%- endfor %}
