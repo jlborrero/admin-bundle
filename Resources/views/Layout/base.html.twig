@@ -39,8 +39,8 @@
             '@MopaBootstrapBundle/Resources/public/js/eyecon-bootstrap-datepicker.js'
             #}
             {% javascripts
-            '@JlbsAdminBundle/Resources/public/js/jquery-1.9.1.js'
-            '@JlbsAdminBundle/Resources/public/js/jquery-ui.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery-1.9.1.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery-ui.js'
             '@JlbsAdminBundle/Resources/public/js/humane.min.js'
             '@JlbsAdminBundle/Resources/public/js/comun.js'
             '@MopaBootstrapBundle/Resources/bootstrap/js/transition.js'
@@ -57,12 +57,18 @@
             '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
             'bundles/fosjsrouting/js/router.js'
             '@JlbsAdminBundle/Resources/public/js/lightbox.js'
-            '@JlbsAdminBundle/Resources/public/js/jquery.form.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery.form.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery-ui-timepicker-addon.js'
             filter="yui_js" %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
             <script type="text/javascript"
                     src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+            {% if(app.request.locale !='en') %}
+            <script src="{{ asset('bundles/jlbsadmin/js/jquery/I18N/jquery.ui.datepicker-'~ app.request.locale | default('es') ~'.js') }}"></script>
+            <script src="{{ asset('bundles/jlbsadmin/js/jquery/I18N/jquery-ui-timepicker-'~ app.request.locale | default('es') ~'.js') }}"></script>
+            {% endif %}
         {% endblock head_script %}
 
         <title>{% block title %}Administración | {% endblock title %}</title>
