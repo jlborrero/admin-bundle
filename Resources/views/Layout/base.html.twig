@@ -15,7 +15,7 @@
                    '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-3-datepicker.less'
             #}
             {% stylesheets
-            'bootstrap/less/bootstrap.less'
+            'bootstrap/dist/css/bootstrap.min.css'
             '@JlbsAdminBundle/Resources/public/css/DT_bootstrap.less'
             '@JlbsAdminBundle/Resources/public/css/style.less'
             '@JlbsAdminBundle/Resources/public/css/jackedup.css'
@@ -43,16 +43,7 @@
             '@JlbsAdminBundle/Resources/public/js/jquery/jquery-ui.js'
             '@JlbsAdminBundle/Resources/public/js/humane.min.js'
             '@JlbsAdminBundle/Resources/public/js/comun.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/transition.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/alert.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/modal.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/dropdown.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/scrollspy.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/tab.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/tooltip.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/popover.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/collapse.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/carousel.js'
+            'bootstrap/dist/js/bootstrap.min.js'
             '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
             '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
             'bundles/fosjsrouting/js/router.js'
@@ -87,7 +78,16 @@
 
 {% block body %}
     {% block navbar %}
-        {{ mopa_bootstrap_navbar('backendNavbar', {'template': 'JlbsAdminBundle:Navbar:navbar.html.twig'}) }}
+        {#{ mopa_bootstrap_navbar('backendNavbar', {'template': 'JlbsAdminBundle:Navbar:navbar.html.twig'}) }#}
+        {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, staticTop: true, inverse: false } %}
+            {% block brand %}
+                <a class="navbar-brand" href="{{ path('jlbs_backend_dashboard_index') }}">Backend</a>
+            {% endblock %}
+
+            {% block menu %}
+                {{ mopa_bootstrap_menu('CoreBackendBundle:Builder:mainMenu') }}
+            {% endblock %}
+        {% endembed %}
     {% endblock navbar %}
 
     {% block container %}
