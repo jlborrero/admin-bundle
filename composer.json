@@ -13,7 +13,8 @@
     ],
     "require": {
         "knplabs/knp-paginator-bundle": "dev-master",
-        "knplabs/knp-menu-bundle": "@dev",
+        "knplabs/knp-menu-bundle": "dev-master",
+        "knplabs/knp-menu": "2.0.*@dev",
         "mopa/bootstrap-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "1.1.*",
         "leafo/lessphp": "dev-master"
