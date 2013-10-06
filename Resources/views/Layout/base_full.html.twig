@@ -1,0 +1,153 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+
+<!DOCTYPE html>
+
+{% block html_tag %}
+<html>
+{% endblock html_tag %}
+
+{% block head %}
+    <head>
+        <meta charset="UTF-8"/>
+        {% block head_style %}
+            {# Override this block to add your own files!
+            '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+                   '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-3-datepicker.less'
+            #}
+            {% stylesheets
+            'bootstrap/dist/css/bootstrap.min.css'
+            '@JlbsAdminBundle/Resources/public/css/DT_bootstrap.less'
+            '@JlbsAdminBundle/Resources/public/css/style.less'
+            '@JlbsAdminBundle/Resources/public/css/jackedup.css'
+            '@JlbsAdminBundle/Resources/public/css/jquery-ui-1.10.3.css'
+            '@JlbsAdminBundle/Resources/public/css/jquery.tagsinput.css'
+            '@JlbsAdminBundle/Resources/public/css/lightbox.css'
+            filter="lessphp, yui_css, cssrewrite" %}
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen"/>
+            {% endstylesheets %}
+            {# To use this without less use the base_css.html.twig template as your base
+             # Be sure you understand whats going on: have a look into
+             # https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/css-vs-less.md
+             #}
+        {% endblock head_style %}
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% block head_script %}
+            {# Overwrite this block to add your own js here, to get them generated into final files
+
+            '@MopaBootstrapBundle/Resources/public/js/eyecon-bootstrap-datepicker.js'
+            #}
+            {% javascripts
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery-1.9.1.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery-ui.js'
+            '@JlbsAdminBundle/Resources/public/js/humane.min.js'
+            '@JlbsAdminBundle/Resources/public/js/comun.js'
+            'bootstrap/dist/js/bootstrap.min.js'
+            '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+            '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+            'bundles/fosjsrouting/js/router.js'
+            '@JlbsAdminBundle/Resources/public/js/lightbox.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery.form.js'
+            '@JlbsAdminBundle/Resources/public/js/jquery/jquery-ui-timepicker-addon.js'
+            filter="yui_js" %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <script type="text/javascript"
+                    src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+            {% if(app.request.locale !='en') %}
+            <script src="{{ asset('bundles/jlbsadmin/js/jquery/I18N/jquery.ui.datepicker-'~ app.request.locale | default('es') ~'.js') }}"></script>
+            <script src="{{ asset('bundles/jlbsadmin/js/jquery/I18N/jquery-ui-timepicker-'~ app.request.locale | default('es') ~'.js') }}"></script>
+            {% endif %}
+        {% endblock head_script %}
+
+        <title>{% block title %}Administración | {% endblock title %}</title>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+        {% block head_bottom %}
+        {% endblock head_bottom %}
+    </head>
+{% endblock head %}
+
+{% block body_tag %}
+<body data-spy="scroll">
+{% endblock body_tag %}
+
+{% block body_start %}
+{% endblock body_start %}
+
+{% block body %}
+    {% block navbar %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {#{ mopa_bootstrap_navbar('backendNavbar', {'template': 'JlbsAdminBundle:Navbar:navbar.html.twig'}) }#}
+            {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, staticTop: true, inverse: false } %}
+                {% block brand %}
+                    <a class="navbar-brand" href="{{ path('jlbs_backend_dashboard_index') }}">Backend</a>
+                {% endblock %}
+                {% block menu %}
+                    {{ mopa_bootstrap_menu('CoreBackendBundle:Builder:mainMenu') }}
+                    {{ mopa_bootstrap_menu('CoreBackendBundle:Builder:RightSideDropdownMenu') }}
+                {% endblock %}
+            {% endembed %}
+        {% endif %}
+    {% endblock navbar %}
+
+    {% block container %}
+        <div class="{% block container_class %}container{% endblock container_class %}">
+            {% block header %}
+                <ul class="breadcrumb">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {% block migas %}
+                            <li>
+                                <a href="#"><a href="{{ path('jlbs_backend_dashboard_index') }}">Backend</a>
+                            </li>
+                        {% endblock %}
+                    {% endif %}
+                </ul>
+            {% endblock %}
+
+            <div class="content">
+                {% block flashes %}
+                    {% if app.session.flashbag.peekAll|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ session_flash() }}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock flashes %}
+
+                {% block content_row %}
+                    <div class="row">
+                        {% block content %}
+                            <div class="col-md-9">
+                                {% block content_content %}
+                                    <strong>Hier könnte Ihre Werbung stehen ... </strong>
+                                {% endblock content_content %}
+                            </div>
+                            <div class="col-md-3">
+                                {% block content_sidebar %}
+                                    <h2>Sidebar</h2>
+                                {% endblock content_sidebar %}
+                            </div>
+                        {% endblock content %}
+                    </div>
+                {% endblock content_row %}
+            </div>
+            <footer>
+                {% block footer %}
+                    <p>&copy; <a href="http://www.mohrenweiserpartner.de" target="_blank">Mohrenweiser & Partner</a>
+                        2011-2013</p>
+                {% endblock footer %}
+            </footer>
+        </div> <!-- /container -->
+    {% endblock container %}
+    {% block foot_script %}
+        {# To only use a subset or add more js overwrite and copy paste this block
+        To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
+        Otherwise the regeneration is done on every load in dev more with use_controller: true
+         #}
+    {% endblock foot_script %}
+{% endblock body %}
+</body>
+</html>
