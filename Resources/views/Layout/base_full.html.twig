@@ -16,13 +16,14 @@
             #}
             {% stylesheets
             'bootstrap/dist/css/bootstrap.min.css'
-            '@JlbsAdminBundle/Resources/public/css/DT_bootstrap.less'
-            '@JlbsAdminBundle/Resources/public/css/style.less'
+            '@JlbsAdminBundle/Resources/public/css/DT_bootstrap.css'
+            '@JlbsAdminBundle/Resources/public/css/TableTools.css'
+            '@JlbsAdminBundle/Resources/public/css/style.css'
             '@JlbsAdminBundle/Resources/public/css/jackedup.css'
             '@JlbsAdminBundle/Resources/public/css/jquery-ui-1.10.3.css'
             '@JlbsAdminBundle/Resources/public/css/jquery.tagsinput.css'
             '@JlbsAdminBundle/Resources/public/css/lightbox.css'
-            filter="lessphp, yui_css, cssrewrite" %}
+            filter="lessphp, yui_css, cssembed" %}
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen"/>
             {% endstylesheets %}
             {# To use this without less use the base_css.html.twig template as your base
