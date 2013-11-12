@@ -38,7 +38,7 @@ $.extend($.fn.dataTableExt.oPagination, {
                     '<li class="next disabled"><a href="#">' + oLang.sNext + ' &rarr; </a></li>' +
                     '</ul>'
             );
-            $(nInput).addClass('input-mini');
+            $(nInput).addClass('pull-right');
             nPaging.appendChild(nInput);
             var els = $('a', nPaging);
             $(els[0]).bind('click.DT', { action:"previous" }, fnClickHandler);

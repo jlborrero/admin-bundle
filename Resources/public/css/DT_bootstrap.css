@@ -63,3 +63,8 @@ table.dataTable th:active {
     color: #0069D6;
     font-weight: bold
 }
+
+.dataTables_paginate select{
+    margin: 20px 0;
+    padding: 4px 0;
+}

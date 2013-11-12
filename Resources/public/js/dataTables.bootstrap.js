@@ -5,6 +5,7 @@
  * Time: 17:14
  * To change this template use File | Settings | File Templates.
  */
+/*
 $.extend( true, $.fn.DataTable.TableTools.classes, {
     "container": "btn-group pull-right",
     "buttons": {
@@ -27,4 +28,4 @@ $.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
         "button": "li",
         "liner": "a"
     }
-} );
+} );*/
