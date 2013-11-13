@@ -82,9 +82,9 @@
         foreach ($list as $v) {
             $aaData[] = array(
             {%- for field, metadata in fields %}
-                "{{ loop.index0 }}" => $v->get{{ field | replace({'_': ''})| capitalize }}(),
+               $v->get{{ field | replace({'_': ''})| capitalize }}(),
             {%- endfor %}
-            "{{ fields | length }}" => $this->renderView('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:actions.html.twig', array('entity' => $v)),
+               $this->renderView('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:actions.html.twig', array('entity' => $v)),
             );
         }
         $output = array(
