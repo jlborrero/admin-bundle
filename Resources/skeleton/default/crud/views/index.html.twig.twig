@@ -52,6 +52,18 @@
             "sPaginationType": "bootstrap",
             "bLengthChange": true,
             "sDom": "<'row'<'col-md-6'l><'col-md-6'Tf>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+            "oTableTools": {
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf",
+                "aButtons": [
+                    "copy",
+                    "print",
+                    {
+                        "sExtends": "collection",
+                        "sButtonText": 'Save <span class="caret" />',
+                        "aButtons": ["xls", "pdf" ]
+                    }
+                ]
+            },
             "oLanguage": getLocale("es")
         });
     });
