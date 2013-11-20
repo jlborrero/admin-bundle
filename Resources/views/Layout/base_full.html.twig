@@ -100,7 +100,8 @@
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         {% block migas %}
                             <li>
-                                <a href="#"><a href="{{ path('jlbs_backend_dashboard_index') }}">Backend</a>
+                                <a href="{{ path('jlbs_backend_dashboard_index') }}"><span
+                                            class="glyphicon glyphicon-home">Backend</span> </a>
                             </li>
                         {% endblock %}
                     {% endif %}
