@@ -105,3 +105,9 @@ function unblock_screen() {
         $('#screenBlock').remove();
     });
 }
+
+$('body').on('click', 'a', function (event) {
+    if ($(this).attr("href") === "#") {
+        event.preventDefault();
+    }
+});
