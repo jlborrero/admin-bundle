@@ -1,8 +1,3 @@
-$('body').on('click', 'a', function (event) {
-    if ($(this).attr("href") === "#") {
-        event.preventDefault();
-    }
-});
 $('.link-disabled').click(function () {return false;});
 
 function getLocale(locale){
