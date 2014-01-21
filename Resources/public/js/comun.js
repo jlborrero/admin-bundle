@@ -99,3 +99,12 @@ $('body').on('click', 'a', function (event) {
         }
     }
 })(jQuery);
+
+$(document).ready(function () {
+    function alertTimeout(wait) {
+        setTimeout(function () {
+            $('.alert-dismissable').hide('slow');
+        }, wait);
+    }
+    alertTimeout(5000);
+});
