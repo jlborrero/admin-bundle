@@ -1,50 +1,52 @@
-$('.link-disabled').click(function () {return false;});
+$('.link-disabled').click(function () {
+    return false;
+});
 
-function getLocale(locale){
+function getLocale(locale) {
     var lang = {};
-    if(locale == "es"){
+    if (locale == "es") {
         lang = {
-    "sProcessing":   "Procesando...",
-    "sLengthMenu":   "Mostrar _MENU_ registros",
-    "sZeroRecords":  "No se encontraron resultados",
-    "sInfo":         "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
-    "sInfoEmpty":    "Mostrando desde 0 hasta 0 de 0 registros",
-    "sInfoFiltered": "(filtrado de _MAX_ registros en total)",
-    "sInfoPostFix":  "",
-    "sSearch":       "",
-    "sUrl":          "",
-    "oPaginate": {
-        "sFirst":    "Primero",
-        "sPrevious": "Anterior",
-        "sNext":     "Siguiente",
-        "sLast":     "Último"
-    }
-};
-       
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sInfo": "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando desde 0 hasta 0 de 0 registros",
+            "sInfoFiltered": "(filtrado de _MAX_ registros en total)",
+            "sInfoPostFix": "",
+            "sSearch": "",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente",
+                "sLast": "Último"
+            }
+        };
+
     }
     return lang
-    
+
 }
 
-function humaneAlert (type, message){
+function humaneAlert(type, message) {
     humane.timeout = 2500;
-    
-    if(type == 'success'){
+
+    if (type == 'success') {
         humane.success(message);
     }
-    if(type == 'error'){
+    if (type == 'error') {
         //    humane.timeout = 0;
         //    humane.clickToClose = true;
         humane.error(message);
-    
+
     }
-    if(type == 'info'){
+    if (type == 'info') {
         //    humane.timeout = 0;
         //    humane.clickToClose = true;
         humane.info(message);
 
     }
-    if(type == 'log'){
+    if (type == 'log') {
         //    humane.timeout = 0;
         //    humane.clickToClose = true;
         humane.log(message);
@@ -67,29 +69,23 @@ function unblock_screen() {
     });
 }
 
-$('body').on('click', 'a', function (event) {
-    if ($(this).attr("href") === "#") {
-        event.preventDefault();
-    }
-});
-
-(function($) {
-    $.fn.placeholder = function() {
-        if(typeof document.createElement("input").placeholder == 'undefined') {
-            $('[placeholder]').focus(function() {
+(function ($) {
+    $.fn.placeholder = function () {
+        if (typeof document.createElement("input").placeholder == 'undefined') {
+            $('[placeholder]').focus(function () {
                 var input = $(this);
                 if (input.val() == input.attr('placeholder')) {
                     input.val('');
                     input.removeClass('placeholder');
                 }
-            }).blur(function() {
+            }).blur(function () {
                     var input = $(this);
                     if (input.val() == '' || input.val() == input.attr('placeholder')) {
                         input.addClass('placeholder');
                         input.val(input.attr('placeholder'));
                     }
-                }).blur().parents('form').submit(function() {
-                    $(this).find('[placeholder]').each(function() {
+                }).blur().parents('form').submit(function () {
+                    $(this).find('[placeholder]').each(function () {
                         var input = $(this);
                         if (input.val() == input.attr('placeholder')) {
                             input.val('');
@@ -106,5 +102,11 @@ $(document).ready(function () {
             $('.alert-dismissable').hide('slow');
         }, wait);
     }
+
     alertTimeout(5000);
+    $('body').on('click', 'a', function (event) {
+        if ($(this).attr("href") === "#") {
+            event.preventDefault();
+        }
+    });
 });
