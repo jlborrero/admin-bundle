@@ -26,14 +26,17 @@
         */
         if ($request->get('sSearch')) {
             $search = strtolower($request->get('sSearch'));
-            $query
-            {%- for field, metadata in fields %}
-                {%- if metadata.type in ['test', 'string'] %}
-                  ->orwhere("LOWER(c.{{ field }}) LIKE '%{$search}%'")
-                  {%- else %}
-                  ->orwhere("LOWER(c.{{ field }}) = '{$search}'")
-                {%- endif %}
-            {%- endfor %};
+            $query->andWhere(
+               $query->expr()->orX(
+                {%- for field, metadata in fields %}
+                    {%- if metadata.type in ['test', 'string'] %}
+                      "LOWER(c.{{ field }}) LIKE '%{$search}%'",
+                      {%- else %}
+                      "LOWER(c.{{ field }}) = '{$search}'",
+                    {%- endif %}
+                {%- endfor %}
+                )
+            );
         }
         /*
         * Ordering

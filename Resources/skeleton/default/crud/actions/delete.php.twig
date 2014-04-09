@@ -14,7 +14,7 @@
         $entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id);
         if (!$entity) {
             $output['status'] = array(
-                'code' => 'success',
+                'code' => 'error',
                 'message' => $this->get('translator')->trans('No se encontro el registro.')
             );
         }else{

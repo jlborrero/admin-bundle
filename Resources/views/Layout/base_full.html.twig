@@ -46,6 +46,7 @@
             '@JlbsAdminBundle/Resources/public/js/plugin.js'
             '@JlbsAdminBundle/Resources/public/js/comun.js'
             'bootstrap/dist/js/bootstrap.min.js'
+            'bootstrap/js/button.js'
             '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
             '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
             'bundles/fosjsrouting/js/router.js'
@@ -83,79 +84,79 @@
 {% endblock body_start %}
 
 {% block body %}
-{% block navbar %}
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    {#{ mopa_bootstrap_navbar('backendNavbar', {'template': 'JlbsAdminBundle:Navbar:navbar.html.twig'}) }#}
-    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, staticTop: true, inverse: false } %}
-{% block brand %}
-    <a class="navbar-brand" href="{{ path('jlbs_backend_dashboard_index') }}"><span
-                class="glyphicon glyphicon-home"></span> Backend</a>
-{% endblock %}
-    {% block menu %}
-        {{ mopa_bootstrap_menu('CoreBackendBundle:Builder:mainMenu') }}
-        {{ mopa_bootstrap_menu('CoreBackendBundle:Builder:RightSideDropdownMenu') }}
-    {% endblock %}
-    {% endembed %}
-    {% endif %}
-{% endblock navbar %}
+    {% block navbar %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {#{ mopa_bootstrap_navbar('backendNavbar', {'template': 'JlbsAdminBundle:Navbar:navbar.html.twig'}) }#}
+            {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, staticTop: true, inverse: false } %}
+                {% block brand %}
+                    <a class="navbar-brand" href="{{ path('jlbs_backend_dashboard_index') }}"><span
+                                class="glyphicon glyphicon-home"></span> Backend</a>
+                {% endblock %}
+                {% block menu %}
+                    {{ mopa_bootstrap_menu('CoreBackendBundle:Builder:mainMenu') }}
+                    {{ mopa_bootstrap_menu('CoreBackendBundle:Builder:RightSideDropdownMenu') }}
+                {% endblock %}
+            {% endembed %}
+        {% endif %}
+    {% endblock navbar %}
 
-{% block container %}
-    <div class="{% block container_class %}container{% endblock container_class %}">
-        {% block header %}
-            <ul class="breadcrumb">
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {% block migas %}
-                        <li>
-                            <a href="{{ path('jlbs_backend_dashboard_index') }}"><span
-                                        class="glyphicon glyphicon-home"></span> Backend</a>
-                        </li>
-                    {% endblock %}
-                {% endif %}
-            </ul>
-        {% endblock %}
+    {% block container %}
+        <div class="{% block container_class %}container{% endblock container_class %}">
+            {% block header %}
+                <ul class="breadcrumb">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {% block migas %}
+                            <li>
+                                <a href="{{ path('jlbs_backend_dashboard_index') }}"><span
+                                            class="glyphicon glyphicon-home"></span> Backend</a>
+                            </li>
+                        {% endblock %}
+                    {% endif %}
+                </ul>
+            {% endblock %}
 
-        <div class="content">
-            {% block flashes %}
-                {% if app.session.flashbag.peekAll|length > 0 %}
+            <div class="content">
+                {% block flashes %}
+                    {% if app.session.flashbag.peekAll|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ session_flash(true,true) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock flashes %}
+
+                {% block content_row %}
                     <div class="row">
-                        <div class="col-md-12">
-                            {{ session_flash(true,true) }}
-                        </div>
+                        {% block content %}
+                            <div class="col-md-9">
+                                {% block content_content %}
+                                    <strong>Hier könnte Ihre Werbung stehen ... </strong>
+                                {% endblock content_content %}
+                            </div>
+                            <div class="col-md-3">
+                                {% block content_sidebar %}
+                                    <h2>Sidebar</h2>
+                                {% endblock content_sidebar %}
+                            </div>
+                        {% endblock content %}
                     </div>
-                {% endif %}
-            {% endblock flashes %}
-
-            {% block content_row %}
-                <div class="row">
-                    {% block content %}
-                        <div class="col-md-9">
-                            {% block content_content %}
-                                <strong>Hier könnte Ihre Werbung stehen ... </strong>
-                            {% endblock content_content %}
-                        </div>
-                        <div class="col-md-3">
-                            {% block content_sidebar %}
-                                <h2>Sidebar</h2>
-                            {% endblock content_sidebar %}
-                        </div>
-                    {% endblock content %}
-                </div>
-            {% endblock content_row %}
-        </div>
-        <footer>
-            {% block footer %}
-                <p>&copy; <a href="http://www.mohrenweiserpartner.de" target="_blank">Mohrenweiser & Partner</a>
-                    2011-2013</p>
-            {% endblock footer %}
-        </footer>
-    </div> <!-- /container -->
-{% endblock container %}
-{% block foot_script %}
-    {# To only use a subset or add more js overwrite and copy paste this block
-    To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
-    Otherwise the regeneration is done on every load in dev more with use_controller: true
-     #}
-{% endblock foot_script %}
+                {% endblock content_row %}
+            </div>
+            <footer>
+                {% block footer %}
+                    <p>&copy; <a href="http://www.mohrenweiserpartner.de" target="_blank">Mohrenweiser & Partner</a>
+                        2011-2013</p>
+                {% endblock footer %}
+            </footer>
+        </div> <!-- /container -->
+    {% endblock container %}
+    {% block foot_script %}
+        {# To only use a subset or add more js overwrite and copy paste this block
+        To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
+        Otherwise the regeneration is done on every load in dev more with use_controller: true
+         #}
+    {% endblock foot_script %}
 {% endblock body %}
 </body>
 </html>
