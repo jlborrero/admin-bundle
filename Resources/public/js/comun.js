@@ -56,7 +56,7 @@ function humaneAlert(type, message) {
 
 function block_screen() {
     $('<div id="screenBlock"></div>').appendTo('body');
-    $('#screenBlock').css({  opacity: 0, width: $(document).width(), height: $(document).height() });
+    $('#screenBlock').css({ 'z-index':'9999', opacity: 0, width: $(document).width(), height: $(document).height() });
     $('#screenBlock').addClass('blockDiv');
     $('#screenBlock').animate({opacity: 0.7}, 200);
     $('#screenBlock').append('<div id="blockcontainer" style="position:fixed;top:50%;left:50%"></div>');
